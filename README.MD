@@ -74,10 +74,10 @@
 
 - [x] require 'jsonwebtoken' package
 - [x] create jwt - jwt.sign(payload,secret,options)
-- [] verify jwt - jwt.verify(token,secret)
+- [x] verify jwt - jwt.verify(token,secret)
 - [x] add variables in .env JWT_SECRET=jwtSecret and JWT_LIFETIME=1d
-- [] restart the server !!!!
-- [] refactor code, create jwt functions in utils
+- [x] restart the server !!!!
+- [x] refactor code, create jwt functions in utils
 - [] refactor cookie code
 - [] setup func attachCookiesToResponse
 - [] accept payload(res, tokenUser)
