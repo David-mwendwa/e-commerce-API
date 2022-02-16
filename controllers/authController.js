@@ -19,7 +19,7 @@ const register = async (req, res) => {
   // cookies setup
   await attachCookiesToResponse({ res, user: tokenUser });
 
-  //res.status(StatusCodes.CREATED).json({ user: tokenUser });
+  res.status(StatusCodes.CREATED).json({ user: tokenUser });
 };
 
 const login = async (req, res) => {
