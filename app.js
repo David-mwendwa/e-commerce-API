@@ -1,30 +1,30 @@
 require('dotenv').config();
-require('express-async-errors')
+require('express-async-errors');
 
 // express
 const express = require('express');
 const app = express();
 
-const morgan = require('morgan')
-const cookieParser = require('cookie-parser')
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 // database
 const connectDB = require('./db/connect');
 
 // routes
-const authRouter = require('./routes/authRoutes')
+const authRouter = require('./routes/authRoutes');
 
 // middleware
-const notFoundMiddleware = require('./middleware/not-found')
-const errorHandlerMiddleware = require('./middleware/error-handler')
+const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
-app.use(morgan('tiny'))
-app.use(express.json())
-app.use(cookieParser())
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.send('e commerce api')
-})
+  res.send('e commerce api');
+});
 
 app.get('/api/v1', (req, res) => {
   console.log(req.cookies);
@@ -33,8 +33,8 @@ app.get('/api/v1', (req, res) => {
 
 app.use('/api/v1/auth', authRouter);
 
-app.use(notFoundMiddleware)
-app.use(errorHandlerMiddleware)
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 // start server
 const port = process.env.PORT || 5000;
