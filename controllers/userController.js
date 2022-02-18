@@ -8,6 +8,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const getSingleUser = async (req, res) => {
+  console.log(req.user)
   const {id: userId} = req.params
   const user = await User.findOne({ _id: userId });
   if (!user) {
