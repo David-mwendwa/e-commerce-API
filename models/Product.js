@@ -71,6 +71,7 @@ const ProductSchema = new mongoose.Schema(
 );
 // virtuals are props that do not persist or are stored in the database
 // They only exist logically / are usually create on the fly when we want to compute something
+// TODO: Make sure this populates reviews on a product !!!
 ProductSchema.virtual('reviews', {
   ref: 'Review',
   localField: '_id',
