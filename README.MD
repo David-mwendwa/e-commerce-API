@@ -265,14 +265,14 @@
 
 #### Update Review
 
-- [] get id from req.params
-- [] get {rating, title comment} from req.body
-- [] check if review exists
-- [] if no review, 404
-- [] check permissions
-- [] set review properties equal to rating, title, comment
-- [] use await review.save()
-- [] send back 200
+- [x] get id from req.params
+- [x] get {rating, title comment} from req.body
+- [x] check if review exists
+- [x] if no review, 404
+- [x] check permissions
+- [x] set review properties equal to rating, title, comment
+- [x] use await review.save()
+- [x] send back 200
 
 #### Populate
 
