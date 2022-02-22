@@ -16,7 +16,7 @@ router
   .get(getAllReviews)
   .post(authenticateUser, createReview);
 router
-  .router('/:id')
+  .route('/:id')
   .get(getSingleReview)
   .patch(authenticateUser, updateReview)
   .delete(authenticateUser, deleteReview);
