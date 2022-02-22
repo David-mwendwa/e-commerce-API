@@ -19,12 +19,12 @@ const ReviewSchema = new mongoose.Schema(
       required: [true, 'Please provide review text'],
     },
     user: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: true,
     },
     product: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'Product',
       required: true,
     },

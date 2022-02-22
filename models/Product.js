@@ -60,10 +60,18 @@ const ProductSchema = new mongoose.Schema(
     user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+// virtuals are props that do not persist or are stored in the database
+// They only exist logically / are usually create on the fly when we want to compute something
+ProductSchema.virtual('reviews', {
+  ref: 'Review',
+  localField: '_id',
+  foreignField: 'product',
+  justOne: false,
+});
 
 module.exports = mongoose.model('Product', ProductSchema);
