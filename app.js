@@ -7,6 +7,7 @@ const app = express();
 
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload')
 
 // database
 const connectDB = require('./db/connect');
@@ -23,6 +24,9 @@ const errorHandlerMiddleware = require('./middleware/error-handler');
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
+
+app.use(express.static('./public'))
+app.use(fileUpload())
 
 app.get('/', (req, res) => {
   res.send('e commerce api');
@@ -50,3 +54,4 @@ const port = process.env.PORT || 5000;
     console.log(error);
   }
 })();
+
