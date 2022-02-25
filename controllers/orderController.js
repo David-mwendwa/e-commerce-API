@@ -10,7 +10,7 @@ const fakeStripeAPI = async ({ amount, currency }) => {
 };
 
 const getAllOrders = async (req, res) => {
-  const orders = await Orders.find({});
+  const orders = await Order.find({});
   res.status(StatusCodes.OK).json({ count: orders.length, orders });
 };
 
@@ -85,7 +85,20 @@ const createOrder = async (req, res) => {
 };
 
 const updateOrder = async (req, res) => {
-  res.send('updateOrder');
+  const { id: orderId } = req.params;
+  const { paymentIntentId } = req.body;
+
+  const order = await Order.findOne({ _id: orderId });
+  if (!order) {
+    throw new CustomError.BadRequestError(`No product with id : ${orderId}`);
+  }
+  CheckPermissions(req.user, order.user);
+
+  order.paymentIntentId = paymentIntentId;
+  order.status = 'paid';
+  await order.save();
+
+  res.status(StatusCodes.OK).json({ order });
 };
 
 module.exports = {
