@@ -24,7 +24,6 @@ router.route('/showAllMyOrders').get(authenticateUser, getCurrrentUserOrders);
 router
   .route('/:id')
   .get(authenticateUser, getSingleOrder)
-
   .patch(authenticateUser, updateOrder);
 
 module.exports = router;
