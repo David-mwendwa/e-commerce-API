@@ -1,8 +1,13 @@
 const Product = require('../models/Product');
 const Order = require('../models/Order');
 const CustomError = require('../errors');
-const { StatusCodes } = require('../models/Product');
+const { StatusCodes } = require('http-status-codes');
 const { CheckPermissions } = require('../utils');
+
+const fakeStripeAPI = async ({ amount, currency }) => {
+  const client_secret = 'jkjaskasnajsiooas';
+  return { client_secret, amount };
+};
 
 const getAllOrders = async (req, res) => {
   res.send('getAllOrders');
@@ -48,9 +53,27 @@ const createOrder = async (req, res) => {
     // calculate subtotal
     subtotal += item.amount * price;
   }
-  console.log(orderItems);
-  console.log(subtotal);
-  res.send('createOrder');
+  // calculate total
+  const total = tax + shippingFee + subtotal;
+  // get client secret
+  const paymentIntent = await fakeStripeAPI({
+    amount: total,
+    currency: 'usd',
+  });
+
+  const order = await Order.create({
+    orderItems,
+    total,
+    subtotal,
+    tax,
+    shippingFee,
+    clientSecret: paymentIntent.client_secret,
+    user: req.user.userId,
+  });
+
+  res
+    .status(StatusCodes.CREATED)
+    .json({ order, clientSecret: order.client_secret });
 };
 
 const updateOrder = async (req, res) => {
