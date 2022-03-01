@@ -89,6 +89,7 @@ const updateOrder = async (req, res) => {
   const { paymentIntentId } = req.body;
 
   const order = await Order.findOne({ _id: orderId });
+  console.log(order)
   if (!order) {
     throw new CustomError.BadRequestError(`No product with id : ${orderId}`);
   }
