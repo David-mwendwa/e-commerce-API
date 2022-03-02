@@ -78,6 +78,7 @@ const createOrder = async (req, res) => {
     clientSecret: paymentIntent.client_secret,
     user: req.user.userId,
   });
+  console.log(order)
 
   res
     .status(StatusCodes.CREATED)

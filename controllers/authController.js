@@ -14,7 +14,7 @@ const register = async (req, res) => {
   const role = isFirstAccount ? 'admin' : 'user';
 
   const user = await User.create({ name, email, password, role });
-  const tokenUser = createTokenUser(user)
+  const tokenUser = createTokenUser(user);
 
   // cookies setup
   await attachCookiesToResponse({ res, user: tokenUser });
@@ -48,7 +48,7 @@ const logout = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now()),
   });
-  res.status(StatusCodes.OK).json({msg: 'user logged out!'})
+  res.status(StatusCodes.OK).json({ msg: 'user logged out!' });
 };
 
 module.exports = {
